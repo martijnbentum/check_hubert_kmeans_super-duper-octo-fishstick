@@ -12,7 +12,7 @@ def process_cgn(n_files = 1000, model = None, model_filename = None):
         labels = kmeans.audio_filename_to_labels(f, model)
         kmeans.save_labels(labels, output_filename)
 
-def process_mls(n_files = 100, model = None, model_filename = None):
+def process_mls(n_files = 300, model = None, model_filename = None):
     if model is None: model = kmeans.load_kmeans_model(model_filename)
     fn = locations.get_mls_filenames(n_files)
     for f in progressbar(fn[:n_files]):
