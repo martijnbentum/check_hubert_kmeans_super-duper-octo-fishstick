@@ -21,9 +21,11 @@ def make_filename_to_phoneme_labels_dict(corpus = 'cgn',header = None,
     label_filenames = locations.corpus_to_kmeans_label_filenames()[corpus]
     d ={}
     for filename in progressbar(label_filenames):
-        try:d[filename.stem]=filename_to_phoneme_labels(filename, header, data)
+        try:labels=filename_to_phoneme_labels(filename, header, data)
         except ValueError as e:
             print(f'{e} should be FA error or no phone labels')
+        elif len(labels) > 0:
+            d[filename.stem] = labels
     with open(output_filename, 'w') as fout:
         json.dump(d, fout)
     return d
