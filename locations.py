@@ -8,8 +8,8 @@ kmeans_model_filename_hub100 = kmeans_models / 'km_train_hub-model_100clusters'
 kmeans_model_filename_mfcc500 = kmeans_models / 'km_train_mfcc-model_500clusters'
 kmeans_model_filename_hub500 = kmeans_models / 'km_train_hub-model_500clusters'
 
-kmeans_labels_mfcc = cluster_check / 'kmeans_labels_mfcc'
-kmeans_labels_hub = cluster_check / 'kmeans_labels_hub'
+kmeans_labels_mfcc = hubert_root/ 'kmeans_labels_mfcc'
+kmeans_labels_hub = hubert_root/ 'kmeans_labels_hub'
 
 
 cluster_check = hubert_root / 'cluster_check'
@@ -27,7 +27,8 @@ common_voice = pretrain_datasets / 'cv_wav'
 
 mls = pretrain_datasets / 'MLS_dutch_wav'
 
-pretrain_manifest = data / 'manifests/dataset-960h-nl/train.tsv'
+#pretrain_manifest = data / 'manifests/dataset-960h-nl/train.tsv'
+pretrain_manifest = data / 'manifests/dataset-831h-nl/train.tsv'
 
 
 metadata = Path('/projects/0/prjs0893/speech-training/metadata')
@@ -73,8 +74,16 @@ def get_cv_filenames(n_files = 1000):
     return output
 
 
-def corpus_to_kmeans_label_filenames():
-    label_filenames = kmeans_labels.glob('*.txt')
+def kmeans_label_mfcc_filenames():
+    filenames = kmeans_labels_mfcc.glob('train*.km')
+    return list(filenames)
+
+def kmeans_label_hub_filenames():
+    filenames = kmeans_labels_hub.glob('train*.km')
+    return list(filenames)
+
+def corpus_to_cl_kmeans_label_mfcc_filenames():
+    label_filenames = cl_kmeans_labels_mfcc.glob('*.txt')
     o = {'cgn':[], 'mls':[], 'cv':[]}
     for f in label_filenames:
         name = f.name
