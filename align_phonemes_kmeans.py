@@ -35,6 +35,9 @@ def handle_corpus(corpus = 'cgn'):
     pnmis = []
     for i,filename in progressbar(enumerate(label_filenames)):
         frames = kmeans.label_filename_to_frame_labels(filename)
+        if filename.stem not in d.keys():
+            bads.append(filename)
+            continue
         pl = d[filename.stem] 
         frames.phoneme_labels = pl
         handle_frames(frames)
@@ -49,6 +52,7 @@ def handle_corpus(corpus = 'cgn'):
             part = []
     print('pnmi:', pnmi.pnmi(phone_labels, kmean_labels))
     print('pnmi mean / std:', np.mean(pnmis), np.std(pnmis))
+    print(f'aligned {len(output)} files, missed {len(bads)}')
     return output, pnmis
 
 def handle_cgn():
