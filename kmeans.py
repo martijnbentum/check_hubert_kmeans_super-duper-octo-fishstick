@@ -4,9 +4,15 @@ import joblib
 import locations
 from pathlib import Path
 
-def load_kmeans_model(filename = None):
+def load_kmeans_model(filename = None, nclusters = 100, features = 'mfcc'):
+    if nclusters not in [100, 500]:
+        raise ValueError(nclusters, 'should be 100 or  500')
+    if features not in ['mfcc','hub']:
+        raise ValueError(features, 'should be mfcc or hub')
     if filename is None:
-        filename = locations.kmeans_model_filename
+        attr_name = f'kmeans_model_filename_{features}{nclusters}'
+        filename = getattr(locations,attr_name)
+    print(f'loading model {filename}')
     model = joblib.load(str(filename))
     return model
 
