@@ -3,10 +3,18 @@ import random
 
 hubert_root=Path('/projects/0/prjs0893/speech-training/scripts/pretraining/hubert/')
 kmeans_models = hubert_root / 'kmeans_models'
-kmeans_model_filename = kmeans_models / 'km_train_mfcc-model_100clusters'
+kmeans_model_filename_mfcc100 = kmeans_models / 'km_train_mfcc-model_100clusters'
+kmeans_model_filename_hub100 = kmeans_models / 'km_train_hub-model_100clusters'
+kmeans_model_filename_mfcc500 = kmeans_models / 'km_train_mfcc-model_500clusters'
+kmeans_model_filename_hub500 = kmeans_models / 'km_train_hub-model_500clusters'
+
+kmeans_labels_mfcc = cluster_check / 'kmeans_labels_mfcc'
+kmeans_labels_hub = cluster_check / 'kmeans_labels_hub'
+
 
 cluster_check = hubert_root / 'cluster_check'
-kmeans_labels = cluster_check / 'kmeans_labels'
+cl_kmeans_labels_mfcc = cluster_check / 'kmeans_labels_mfcc'
+cl_kmeans_labels_hub = cluster_check / 'kmeans_labels_hub'
 
 speech_training = Path('/projects/0/prjs0893/speech-training')
 
